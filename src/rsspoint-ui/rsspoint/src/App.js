@@ -108,16 +108,7 @@ class App extends Component {
                                                             <hr/>
 
                                                             <p className="card-text">
-                                                                BRATISLAVA. Pol milióna žiadostí na otestovanie
-                                                                prišlo
-                                                                za
-                                                                pätnásť
-                                                                minút do mobilných odberových miest počas nedeľnej
-                                                                tlačovej
-                                                                konferencie,
-                                                                keď premiér Igor Matovič ohlasoval plošné
-                                                                testovanie.
-
+                                                                {entry.item__description}
                                                             </p>
 
                                                             <div>

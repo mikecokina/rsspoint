@@ -4,6 +4,7 @@ from rsspoint.modules.feed import serializer
 from rsspoint.rss.core import get_json_feed
 from rsspoint.rss import parser as rss_parser
 from rsspoint.modules.feed.db import Feed
+from feedparser import parse
 
 
 def create_entry(url, name, user_info, session):
@@ -29,7 +30,7 @@ def create_entry(url, name, user_info, session):
 
 
 def _get_rss_content(instances: List[Feed]) -> List:
-    return [get_json_feed(instance.url) for instance in instances]
+    return [parse(instance.url) for instance in instances]
 
 
 def get_feed_content(user_info, session):
