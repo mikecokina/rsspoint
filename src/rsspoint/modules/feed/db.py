@@ -26,4 +26,5 @@ class Content(Base):
 
     id = Column(Integer, primary_key=True)
     hash = Column(String, unique=True, nullable=False)
+    image = Column(String, unique=True, nullable=False)
     content = Text()
