@@ -65,6 +65,22 @@ code {
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
+.sidebar {
+  font-weight: 500;
+  color: #333;
+}
+
+.side-bar-item {
+  font-size:0.95em;
+  margin: 10px 50px 10px 20px;
+}
+
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
@@ -75,18 +91,9 @@ code {
   color: #999;
 }
 
-.sidebar .nav-link.active {
-  color: #007bff;
-}
-
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
   color: inherit;
-}
-
-.sidebar-heading {
-  font-size: .75rem;
-  text-transform: uppercase;
 }
 
 /*
@@ -126,8 +133,8 @@ code {
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 
 .card-img-top {
-  max-height: 300px;
   width:100%;
+  max-height:450px;
 }
 
 .card-text {
@@ -153,4 +160,37 @@ code {
 
 .rsspoint-content {
   padding: 10px 15px 10px 15px;
+}
+
+.add-feed-btn svg {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sidebar-sticky svg {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feed-filter-content {
+  padding: 10px 50px;
+}
+
+.feed-filter-item {
+  padding: 2px;
+  font-weight: 500;
+  color: #333;
+}
+
+.feed-filter-item label {
+  color: #333333;
+  font-size: 0.9em;
+  padding-left: 10px;
+}
+
+.apply-filter {
+  text-align: right;
+  padding-top: 20px;
 }
