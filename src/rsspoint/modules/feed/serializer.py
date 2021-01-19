@@ -1,6 +1,6 @@
 from multiprocessing.pool import ThreadPool
 from typing import List
-from rsspoint.rss import parser as rss_parser, og_meta
+from rsspoint.rss import parser as rss_parser, meta
 
 
 def feed_serializer(instances):
@@ -21,15 +21,15 @@ def feed_content_serializer(rss_feeds: List, db_entries: List):
                 "item__link": item.link,
                 "item__description": item.summary,
                 "item__date": item.published,
-                "item__og_image": None
+                "item__image": rss_parser.parse_item_image_if_exists(item)
             }
 
-    pool_size = 15
-    # metadata = []
-    # with ThreadPool(pool_size) as pool:
-    #     async_results = [pool.apply_async(og_meta.parse_meta_from_rss_entry, (_, )) for _ in _serialized]
-    #     metadata.append([r.get() for r in async_results])
-    #
-    # for item in [inner for outter in metadata for inner in outter]:
-    #     _serialized[item["link"]]["item__og_image"] = item["og_image"]
+    metadata = []
+    with ThreadPool(50) as pool:
+        async_results = [pool.apply_async(meta.thread_parse_meta_from_rss_entry, (v["item__link"],))
+                         for v in _serialized.values() if v["item__image"] is None]
+        metadata.append([r.get() for r in async_results])
+
+    for item in [inner for outter in metadata for inner in outter]:
+        _serialized[item["link"]]["item__image"] = item["image"]
     return [item for item in _serialized.values()]

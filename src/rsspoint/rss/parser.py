@@ -1,26 +1,10 @@
-from typing import Dict
-from datetime import datetime
-import feedparser.datetimes
-
-# fixme: handle multiple channels
+from feedparser import FeedParserDict
 
 
-def get_title(rss_feed: Dict):
-    return rss_feed["rss"]["channel"]["title"]
-
-
-def get_description(rss_feed: Dict):
-    return rss_feed["rss"]["channel"]["description"]
-
-
-def get_link(rss_feed: Dict):
-    return rss_feed["rss"]["channel"]["link"]
-
-
-def get_items(rss_feed: Dict):
-    return rss_feed["rss"]["channel"]["item"]
-
-
-def parse_date(pub_date):
-    dt = feedparser.datetimes._parse_date(pub_date)
-    return datetime(dt.tm_year, dt.tm_mon, dt.tm_mday, dt.tm_hour, dt.tm_min, dt.tm_sec)
+def parse_item_image_if_exists(feed_item: FeedParserDict) -> str:
+    # search in links image/* type
+    if len(feed_item.links) > 0:
+        for link in feed_item.links:
+            if hasattr(link, "type") and hasattr(link, "href"):
+                if str(link.type).startswith("image"):
+                    return link.href
